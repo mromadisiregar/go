@@ -31,7 +31,7 @@ func main() {
 	// Create sockServer
 	sockServer, errListener := net.Listen("tcp", localPort)
 	if errListener != nil {
-		fmt.Printf("Gagal listen : %+v\n", errListener)
+		fmt.Printf("Gagal listen : \n[%+v]\n", errListener)
 		os.Exit(1)
 	}
 	fmt.Printf("Listen pada port %s\n", localPort)
@@ -44,14 +44,16 @@ func main() {
 		}
 		// Print client address and port
 		fmt.Printf("Menerima koneksi dari %+v\n", sockClient.RemoteAddr())
-		sockProxy, _ := net.Dial("tcp", remoteProxyAddr + ":" + remoteProxyPort)
 		// Dialing connection to remote proxy
-		fmt.Println("Konek ke remote proxy ["+ remoteProxyAddr + ":" + remoteProxyPort +"]")
+		sockProxy, errKonek := net.Dial("tcp", remoteProxyAddr + ":" + remoteProxyPort)
+		if errKonek != nil {
+			fmt.Println("Gagal konek ke remote proxy ["+ remoteProxyAddr + ":" + remoteProxyPort +"]")
+			continue
+		}
+		fmt.Printf("ERR: %+v\n", errKonek)
 		// Let go handle everythings
 		go handleCon(sockClient, sockProxy)
-		fmt.Println("Selesai kopi data dari client ke remote proxy.")
 		go handleCon(sockProxy, sockClient)
-		fmt.Println("Selesai kopi data dari remote proxy ke client.")
 	}
 	sockServer.Close()
 }
