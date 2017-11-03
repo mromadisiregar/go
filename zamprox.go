@@ -30,7 +30,7 @@ func main() {
 	var localPort = ":8888"
 	// Create sockServer
 	sockServer, errListener := net.Listen("tcp", localPort)
-	if errListener := nil {
+	if errListener != nil {
 		fmt.Printf("Gagal listen : %+v\n", errListener)
 		os.Exit(1)
 	}
@@ -38,7 +38,7 @@ func main() {
 	// Create daemon
 	for {
 		sockClient, errAsep := sockServer.Accept()
-		if errAsep := nil {
+		if errAsep != nil {
 			fmt.Println("Asep error, lanjut...")
 			continue
 		}
