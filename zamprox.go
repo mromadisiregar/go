@@ -50,7 +50,7 @@ func main() {
 			fmt.Println("Gagal konek ke remote proxy ["+ remoteProxyAddr + ":" + remoteProxyPort +"]")
 			continue
 		}
-		fmt.Printf("ERR: %+v\n", errKonek)
+		//fmt.Printf("ERR: %+v\n", errKonek)
 		// Let go handle everythings
 		go handleCon(sockClient, sockProxy)
 		go handleCon(sockProxy, sockClient)
