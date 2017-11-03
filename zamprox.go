@@ -62,5 +62,6 @@ func handleCon(c net.Conn, p net.Conn) {
 	// Just simple copy io on socket
 	defer c.Close()
 	defer p.Close()
+	// Here we can do interesting stuff 
 	io.Copy(c, p)
 }
