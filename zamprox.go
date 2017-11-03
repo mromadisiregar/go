@@ -2,6 +2,7 @@
 // Little code but huge binary
 // hemm... :|
 // zamprox on Go
+// mromadisiregar@gmail.com
 package main 
 
 import (
